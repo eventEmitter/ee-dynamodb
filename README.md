@@ -23,13 +23,13 @@ fast & simple dynamodb access
 
 
 	// create a table
-	var table = new db.table( config, [ cb ] );
-	var user = new db.table( {}, function( err, user ){} );
+	db.createTable( config, [ cb ] );
+	db.createTable( {}, function( err, user ){} );
 
 
 	// delete table
-	db.tablename.delete( [ cb ] );
-	db.user.delete( function( err ){} );
+	db.deleteTable( [ cb ] );
+	db.deleteTable( function( err ){} );
 
 
 	// create a user
@@ -79,4 +79,14 @@ fast & simple dynamodb access
 
 	// static delete
 	db.tablename.remove( filter, [ cb ] );
-	db.user.remove( { name: [ "michael", "fabian" ] }, function(){} )
+	db.user.remove( { name: [ "michael", "fabian" ] }, function(){} );
+
+
+
+you may not be able to create or use tables with the following names:
+- init
+- createTable
+- deleteTable
+- $
+- $events
+- __request

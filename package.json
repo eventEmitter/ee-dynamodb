@@ -14,10 +14,11 @@
         "url":          "https://github.com/eventEmitter/ee-dynamodb/issues"
     }
     , "dependencies": {
-          "ee-class":   "*"
-        , "ee-event":   "*"
-        , "ee-log":     "*"
-        , "request":    "*"
+          "ee-class":               "*"
+        , "ee-event":               "*"
+        , "ee-log":                 "*"
+        , "ee-aws-v4-signature":    "*"
+        , "ee-aws-v4-request":      "*"
     }
     , "devDependencies": {}
     , "optionalDependencies": {}
