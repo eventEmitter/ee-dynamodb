@@ -12,13 +12,7 @@
 	} );
 
 
-	db.describeTable( "session", function( err, def ){
-		log.trace( err );
-		log.dir( def );
-	} );
-
-
-	db.createTable( "test", {
+	var tableDefinition = {
 		index: { index_accessed: { projection: "all" } }
 	    , attributes: {
 	        accessed: {
@@ -29,7 +23,7 @@
 	            }
 	        }
 	        , fuck: {
-	            type: "number"
+	              type: "number"
 	            , projection: "index_accessed"
 	        }
 	        , you: {
@@ -53,7 +47,73 @@
 	          read: 10
 	        , write: 5
 	    }
-	}, function( err ){
+	};
+	
+
+
+	/*
+	db.createTable( "session", tableDefinition, function( err ){
 		log.trace( err );
 		log.info( "table ready ..." );
+
+		db.updateThroughput( "session", 1, 1, function( err ){
+			log.trace( err );
+			log.info( "Throughput changed ..." );
+
+			db.describeTable( "session", function( err, def ){
+				log.trace( err );
+				log.dir( def );
+
+				db.listTables( function( err, list ){
+					log.trace( err );
+					log.dir( list );
+
+					db.deleteTable( "session", function( err ){
+						log.trace( err );
+						log.info( "table deleted ..." );
+
+					} );
+				} );
+			} );
+		} );
 	} );
+
+
+	  sessionId: 	"aaaa"
+			, accessed: 	Date.now()
+			, created: 		Date.now()
+			, fuck: 		454545
+			, you: 			new Buffer( "illb" )
+			, hiho: 		4
+			, arr: 			[ new Buffer( "sdfdsffsdf" ) ]
+			, strarr: 		[ "hi", "ho" ]
+			, nnum: 		[ 1,2,3,4,5,56]
+	
+
+
+*/
+
+	db.createTable( "session", tableDefinition, function( err ){
+		log.info( "table ready ..." );
+
+		var session = db.table( "session" );
+
+		var item = new session();
+		item.set( {
+			  sessionId: 	"aaaa"
+			, accessed: 	1
+			, created: 		2
+		} );
+
+
+		item.save( function( err ){
+			log.trace( err );
+
+			db.describeTable( "session", function( err, def ){
+				log.trace( err );
+				log.dir( def );
+			} );
+		} );
+	} );
+	
+	
