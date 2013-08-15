@@ -108,6 +108,7 @@
 
 		item.save( function( err ){
 			log.trace( err );
+			log.trace( new Error() );
 
 			db.describeTable( "session", function( err, def ){
 				log.trace( err );
