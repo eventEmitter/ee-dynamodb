@@ -1,15 +1,39 @@
 
+
+
 	//process.env.NODE_DEBUG = "request"
 
 	var DynamoDB = require( "./" )
 		, log 	= require( "ee-log" );
 
 
+
+
+
+
+	var test = function(){
+		db.session.findOne( { sessionId: "aaaa" }, function( err, session ){
+			log.trace( err );
+			log.dir( session );
+		} );
+	}
+
+
 	var db = new DynamoDB( {
 		  key: 			"AKIAIR5LTODIOS4LLRRQ"
 		, secret: 		"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"
 		, region: 		"eu-west-1"
+		, on: {
+			  load: test
+			, error: function( err ){ log.trace( err ) }
+		}
 	} );
+
+	
+
+
+
+
 
 
 	var tableDefinition = {
@@ -49,26 +73,26 @@
 	    }
 	};
 	
-
+	
 
 	/*
-	db.createTable( "session", tableDefinition, function( err ){
+	db.create( "session4", tableDefinition, function( err ){
 		log.trace( err );
 		log.info( "table ready ..." );
 
-		db.updateThroughput( "session", 1, 1, function( err ){
+		db.throughput( "session4", 1, 1, function( err ){
 			log.trace( err );
 			log.info( "Throughput changed ..." );
 
-			db.describeTable( "session", function( err, def ){
+			db.describe( "session4", function( err, def ){
 				log.trace( err );
 				log.dir( def );
 
-				db.listTables( function( err, list ){
+				db.list( function( err, list ){
 					log.trace( err );
 					log.dir( list );
 
-					db.deleteTable( "session", function( err ){
+					db.delete( "session4", function( err ){
 						log.trace( err );
 						log.info( "table deleted ..." );
 
@@ -77,23 +101,14 @@
 			} );
 		} );
 	} );
+	*/
 
-
-	  sessionId: 	"aaaa"
-			, accessed: 	Date.now()
-			, created: 		Date.now()
-			, fuck: 		454545
-			, you: 			new Buffer( "illb" )
-			, hiho: 		4
-			, arr: 			[ new Buffer( "sdfdsffsdf" ) ]
-			, strarr: 		[ "hi", "ho" ]
-			, nnum: 		[ 1,2,3,4,5,56]
 	
 
+/*
 
-*/
 
-	db.createTable( "session", tableDefinition, function( err ){
+	db.create( "session", tableDefinition, function( err ){
 		log.info( "table ready ..." );
 
 		var session = db.table( "session" );
@@ -115,5 +130,8 @@
 			} );
 		} );
 	} );
-	
+
+*/
+
+
 	

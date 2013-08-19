@@ -5,6 +5,8 @@
  	
 fast & simple dynamodb access
 
+ «$», «$events» or «parent»!
+
 ## installation
 	
 	npm install ee-dynamodb
@@ -23,13 +25,13 @@ fast & simple dynamodb access
 
 
 	// create a table
-	db.createTable( config, [ cb ] );
-	db.createTable( {}, function( err, user ){} );
+	db.create( config, [ cb ] );
+	db.create( {}, function( err, user ){} );
 
 
 	// delete table
-	db.deleteTable( [ cb ] );
-	db.deleteTable( function( err ){} );
+	db.delete( [ cb ] );
+	db.delete( function( err ){} );
 
 
 	// create a user

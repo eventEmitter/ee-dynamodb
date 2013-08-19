@@ -16,6 +16,7 @@
     , "dependencies": {
           "ee-class":               "*"
         , "ee-event":               "*"
+        , "ee-waiter":              "*"
         , "ee-log":                 "*"
         , "ee-aws-v4-signature":    "*"
         , "ee-aws-v4-request":      "*"
