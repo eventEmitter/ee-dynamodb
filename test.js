@@ -15,6 +15,12 @@
 		db.session.findOne( { sessionId: "aaaa" }, function( err, session ){
 			log.trace( err );
 			log.dir( session );
+
+			session.accessed = Math.floor( Math.random() * 10000 );
+			session.funwith = "b";
+			session.save( function( err ){
+				log.trace( err );
+			});
 		} );
 	}
 
