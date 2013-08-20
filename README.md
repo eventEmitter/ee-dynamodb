@@ -1,11 +1,9 @@
 # ee-dynamodb
 
-
- 	*** under contruction! ***
+ATTENTION: this module is still incomplete & unstable! The functionality described below should work. The module is at the moment not fully tested.
  	
 fast & simple dynamodb access
 
- «$», «$events» or «parent»!
 
 ## installation
 	
@@ -36,15 +34,11 @@ fast & simple dynamodb access
 
 	// create a user
 	var user = new db.tablename( user, [ cb ] );
-	var users = new db.tablename( [ user, .. ], [ cb ] );
 
 	var michael = new db.user( {
 		  name: "michael"
 		, birthdate: Date.now()
 	} ).save( function( err, michael ){} );
-
-	// create multiple users
-	var users = new db.user( [ { name: "fabian" }, { name: "konrad" } ], fucntion( err, users ){} );
 
 
 
@@ -62,13 +56,15 @@ fast & simple dynamodb access
 
 	// update user
 	entityObject.someField = value;
+	entityObject.set( { you: "can", set: "multiple", values: "using", this: "method" } );
+	entityObject.set( "set", "valueForSetReservedKeyword" );
 	entityObject.save( cb );
 
 	user.someNewFieldNeverSeenBefore = Math.random();
-	user.save( function( err ){} );
+	user.save( function( err, user ){} );
 
 
-	// static update
+	// static update ( not implemened yet )
 	db.tablename.update( filter, update, [ cb ] );
 	db.user.update( { birthdate: { lt: Date.noe() } }, { someNewFieldNeverSeenBefore: MAth.random() }, function( err ){} );
 
@@ -79,16 +75,29 @@ fast & simple dynamodb access
 	user.delete( function( err ){} );
 
 
-	// static delete
+	// static delete ( not implemente yet )
 	db.tablename.remove( filter, [ cb ] );
 	db.user.remove( { name: [ "michael", "fabian" ] }, function(){} );
 
 
+### ATTENTION
 
-you may not be able to create or use tables with the following names:
-- init
-- createTable
-- deleteTable
+in order to access tables or attributes on items with reserved names you have to use the following methods:
+
+	db.table( name )
+	item.set( name, value )
+	item.get( name )
+
+reserved names for tables are: 
+- $id
 - $
-- $events
-- __request
+
+reserved names on items are
+- $
+- $id
+- $request
+- $typeEncoder
+- save
+- get
+- set
+- init
