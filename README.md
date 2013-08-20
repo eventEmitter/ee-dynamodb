@@ -41,17 +41,34 @@ fast & simple dynamodb access
 	} ).save( function( err, michael ){} );
 
 
+	// query syntax. the module will decide itself if it should use the GetItem, BatchGetItem, Query or Scan API.
+	// you should know what the differences are. examples: if you have a compund primary key you have to pass both values in 
+	// order to be able to use the GetItem API. if you retreive values which are not part of an index the scan function
+	// will be used. if you use keys from different indexes the scan API will be used. 
+	{
+		  $select: [ "the", "attributes", "to", "select" ] // defaults to all attributes
+		, $limit: 100 // dynamodb will do anyway a limit ( if the response gets bigger than 1 mb )
+		, key: value 
+		, key: { contains: "whatever" } // finds the string in an string attribute or the item in a string set attribute
+		, key: { gte: 2345 } // finds values equal or greater than 2345
+	}
+
 
 	// find one user
 	db.tablename.findOne( filter, cb );
-	db.user.findOne( { name: "michael" }, function( err, user ){} );
+	db.user.findOne( { name: "michael" }, function( err, user, more ){} );
 
 
 	// find multiple users
 	db.tablename.find( filter, cb );
-	db.user.find( { birthdate: { gt: 0 } }, function( err, users ){} );
+	db.user.find( { birthdate: { gt: 0 } }, function( err, users, more ){
+		// do something with the data
 
+		// get more records
+		if ( more ) more();
+	} );
 
+	// if you passed the $limit argument to the find or findOne method or there are more result sets as dynamodb resturns per request you will get third parameter «more» delivered to your callback. you cann call that function to retreive the next records. if you pass a callback as parameter 0 to the more function that callback will be called for the new results, else the ôriginal callback passed to the find or findOne function will be called again.
 
 
 	// update user

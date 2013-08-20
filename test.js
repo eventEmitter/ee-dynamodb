@@ -18,8 +18,11 @@
 
 			session.accessed = Math.floor( Math.random() * 10000 );
 			session.funwith = "b";
-			session.save( function( err ){
+			session.save( function( err, s ){
 				log.trace( err );
+				s.delete( function( e ){
+					log.trace( e );
+				} );
 			});
 		} );
 	}
