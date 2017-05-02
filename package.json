@@ -15,9 +15,9 @@
     }
     , "dependencies": {
           "ee-class":               "1.x"
-        , "ee-event-emitter":       "0.3.x"
+        , "ee-event-emitter":       "~1.0.1"
         , "ee-waiter":              "0.1.x"
-        , "ee-log":                 "0.3.x"
+        , "ee-log":                 "~2.0.2"
         , "ee-aws-v4-signature":    "0.1.x"
         , "ee-aws-v4-request":      "0.1.x"
     }
