@@ -1,5 +1,7 @@
 # ee-dynamodb
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/eventEmitter/ee-dynamodb.svg)](https://greenkeeper.io/)
+
 ATTENTION: this module is still incomplete & unstable! The functionality described below should work. The module is at the moment not fully tested.
  	
 fast & simple dynamodb access
